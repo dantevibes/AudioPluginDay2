@@ -4,7 +4,7 @@
   <FILTER uid="1" x="0.5" y="0.1">
     <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="246006c0" isInstrument="0"
-            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
+            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="4"
             isShell="0"/>
     <STATE>0.</STATE>
     <LAYOUT>
@@ -39,7 +39,7 @@
     <STATE>0.</STATE>
     <LAYOUT>
       <INPUTS>
-        <BUS index="0" layout="L R"/>
+        <BUS index="0" layout="L R Ls Rs"/>
       </INPUTS>
       <OUTPUTS>
         <BUS index="0" layout="disabled"/>
@@ -62,12 +62,12 @@
     </LAYOUT>
   </FILTER>
   <FILTER uid="5" x="0.39" y="0.3365384615384616" uiLastX_Normal="51" uiLastY_Normal="303"
-          uiopen_Normal="0">
+          uiopen_Normal="1">
     <PLUGIN name="AudioPluginDay2" format="VST3" category="Instrument|Synth"
             manufacturer="yourcompany" version="1.0.0" file="/Users/descrofaniaudiocodes/Library/Audio/Plug-Ins/VST3/AudioPluginDay2.vst3"
-            uid="acf7bccf" isInstrument="1" fileTime="1771cba1bc5" infoUpdateTime="1771cbf6170"
+            uid="acf7bccf" isInstrument="1" fileTime="1771cba1bc5" infoUpdateTime="179358b0774"
             numInputs="0" numOutputs="2" isShell="0"/>
-    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>356.VMjLgrU....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DCNy3BTYQ0TSsVago2YrU0Y2Y0XqE0ZhsVUF4hKDYlKPUjZTEDLD4RPHAkVpEDTtHEUlA0YMEiVskjLgACMFkkYLESXxgCah4BVWgkbUcUVtPDTBQjKt3hKtvVVrQSNO4hKUAkTEQ0TtPjYt7VTF4RPXEUPScVLgAycFkET2YEVzzDLgACMFkETEwlXmAiQtDSQFEFLUYjKAolKA4hKt3hKt3hK1sxPt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
     <LAYOUT>
       <INPUTS/>
       <OUTPUTS>

@@ -5,6 +5,14 @@
 
   ==============================================================================
 */
+/*
+TODO: Click anywhere on the window to play a note.
+-if you click and drag, change the pitch of the note
+-should we play a sound?
+
+-save plugin state when exiting DAW
+-load plugin state when loading a session
+*/
 
 #pragma once
 
@@ -52,8 +60,16 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    //==============================================================================
+    juce::AudioParameterBool* shouldPlaySound = nullptr; //= false;
+    juce::AudioParameterFloat* bgColor = nullptr;
+    
+    static void UpdateAutomatableParameter(juce::RangedAudioParameter*, float value);
 
 private:
+    juce::AudioProcessorValueTreeState apvts;
+    //Random r;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPluginDay2AudioProcessor)
 };

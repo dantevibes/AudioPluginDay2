@@ -19,14 +19,27 @@ AudioPluginDay2AudioProcessor::AudioPluginDay2AudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
 #endif
+apvts(*this, nullptr)
 {
+    //shouldPlaySound = new juce::AudioParameterBool( "ShouldPlaySoundParam", "shouldPlaySound", false );
+    //addParameter(shouldPlaySound);
+    auto shouldPlaySoundParam = std::make_unique<juce::AudioParameterBool>("ShouldPlaySoundParam", "shouldPlaySound", false );
+    
+    auto* param = apvts.createAndAddParameter(std::move(shouldPlaySoundParam) );
+    
+    shouldPlaySound = dynamic_cast<juce::AudioParameterBool*>( param );
+    
+    auto bgColorParam = std::make_unique<juce::AudioParameterFloat>("Background color", "background color", 0.f, 1.f, 0.5f);
+    param = apvts.createAndAddParameter(std::move(bgColorParam) );
+    bgColor = dynamic_cast<juce::AudioParameterFloat*>(param);
+    
+    apvts.state = juce::ValueTree("PFMSynthValueTree");
 }
 
 AudioPluginDay2AudioProcessor::~AudioPluginDay2AudioProcessor()
-{
-}
+{ }
 
 //==============================================================================
 const juce::String AudioPluginDay2AudioProcessor::getName() const
@@ -150,11 +163,21 @@ void AudioPluginDay2AudioProcessor::processBlock (juce::AudioBuffer<float>& buff
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    juce::Random r;
+    
+    for (int i = 0; i < buffer.getNumSamples(); ++i )
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        for( int channel = 0; channel < buffer.getNumChannels(); ++channel )
+        {
+            if( shouldPlaySound->get() )
+            {
+                buffer.setSample(channel, i, r.nextFloat() * .1 );
+            }
+            else
+            {
+                buffer.setSample(channel, i, 0);
+            }
+        }
     }
 }
 
@@ -175,12 +198,28 @@ void AudioPluginDay2AudioProcessor::getStateInformation (juce::MemoryBlock& dest
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    juce::MemoryOutputStream mos(destData, false);
+    apvts.state.writeToStream( mos );
 }
 
 void AudioPluginDay2AudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+    
+    juce::ValueTree tree = juce::ValueTree::readFromData(data, sizeInBytes);
+    if( tree.isValid() )
+    {
+        apvts.state = tree;
+    }
+    DBG( apvts.state.toXmlString() );
+}
+
+void AudioPluginDay2AudioProcessor::UpdateAutomatableParameter(juce::RangedAudioParameter* param, float value)
+{
+    param->beginChangeGesture();
+    param->setValueNotifyingHost(value);
+    param->endChangeGesture();
 }
 
 //==============================================================================
